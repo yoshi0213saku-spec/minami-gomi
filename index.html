@@ -23,11 +23,12 @@
         }
         .app-header {
             background: linear-gradient(135deg, var(--primary-green) 0%, #1e3d1a 100%);
-            padding-bottom: 1.5rem;
+            padding-bottom: 1rem;
             border-radius: 0 0 24px 24px;
             position: sticky;
             top: 0;
             z-index: 50;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         .main-card {
             border-radius: 20px;
@@ -86,9 +87,9 @@
 
         /* 月選択ボタン */
         .month-tab {
-            padding: 8px 20px;
-            border-radius: 12px;
-            font-size: 0.85rem;
+            padding: 6px 18px;
+            border-radius: 10px;
+            font-size: 0.8rem;
             font-weight: 900;
             color: white;
             white-space: nowrap;
@@ -117,10 +118,10 @@
         .month-scroll-container::-webkit-scrollbar { display: none; }
 
         .year-indicator {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             display: block;
             opacity: 0.8;
-            margin-bottom: -2px;
+            margin-bottom: -1px;
         }
 
         html { scroll-behavior: smooth; }
@@ -129,8 +130,8 @@
 <body class="min-h-screen">
 
     <!-- Header Area -->
-    <header class="app-header pt-6 text-white text-center shadow-md">
-        <div class="flex justify-between items-center mb-4 px-6">
+    <header class="app-header pt-4 text-white text-center">
+        <div class="flex justify-between items-center mb-3 px-6">
             <div class="w-8"></div>
             <h1 class="text-xl font-black tracking-wider">南相木村ごみナビ</h1>
             <button onclick="resetToToday()" class="p-2 opacity-80 active:opacity-100">
@@ -139,13 +140,35 @@
         </div>
         
         <!-- 月選択タブ -->
-        <div class="month-scroll-container" id="month-tabs">
+        <div class="month-scroll-container mb-3" id="month-tabs">
             <!-- JSで生成 -->
+        </div>
+
+        <!-- 役場電話番号 & 収集時間 -->
+        <div class="flex justify-around items-center px-4 text-[10px] font-bold">
+            <a href="tel:0267-78-2121" class="flex items-center bg-white/20 rounded-full px-3 py-1 active:bg-white/40 transition-colors">
+                <i class="fas fa-phone-alt mr-1.5 text-blue-300"></i>住民課: 0267-78-2121
+            </a>
+            <div class="flex items-center bg-white/20 rounded-full px-3 py-1">
+                <i class="fas fa-clock mr-1.5 text-orange-300"></i>収集: 朝6:00〜8:30
+            </div>
         </div>
     </header>
 
     <main class="mt-4">
         
+        <!-- Search Bar (上部に移動) -->
+        <section class="px-4 mb-6">
+            <div class="bg-white flex items-center px-4 py-1 shadow-sm border border-gray-100 rounded-2xl">
+                <i class="fas fa-search text-gray-300 ml-2"></i>
+                <input type="text" id="search-input" placeholder="ごみ分別を調べる（例：電池）" 
+                       class="w-full p-3 text-lg focus:outline-none bg-transparent">
+            </div>
+            <div id="search-results" class="mt-4 space-y-3 hidden px-1">
+                <!-- JSで挿入 -->
+            </div>
+        </section>
+
         <!-- Today Section -->
         <section id="today-section" class="px-4 mb-6">
             <div class="main-card bg-white p-5">
@@ -163,36 +186,9 @@
         </section>
 
         <!-- Monthly Slider Area -->
-        <section class="mb-8">
+        <section class="mb-10">
             <div class="month-slider" id="month-slider">
                 <!-- JSで月ごとのページ(month-page)を生成 -->
-            </div>
-        </section>
-
-        <!-- Search Bar -->
-        <section class="px-4 mb-8">
-            <h2 class="text-gray-600 font-black text-sm mb-3 pl-1">ごみ分別を調べる</h2>
-            <div class="bg-white flex items-center px-4 py-1 shadow-sm border border-gray-100 rounded-2xl">
-                <i class="fas fa-search text-gray-300 ml-2"></i>
-                <input type="text" id="search-input" placeholder="例：電池、ビデオテープ" 
-                       class="w-full p-3 text-lg focus:outline-none bg-transparent">
-            </div>
-            <div id="search-results" class="mt-4 space-y-3 hidden px-1">
-                <!-- JSで挿入 -->
-            </div>
-        </section>
-
-        <!-- Info Cards -->
-        <section class="px-4 grid grid-cols-2 gap-3 mb-10">
-            <div class="bg-blue-50 p-4 rounded-2xl text-center border border-blue-100 shadow-sm active:bg-blue-100 transition-colors">
-                <i class="fas fa-phone-alt text-blue-500 mb-1 text-lg"></i>
-                <p class="text-[10px] text-blue-600 font-black uppercase mb-1">役場 住民課</p>
-                <a href="tel:0267-78-2121" class="text-xs font-black text-blue-900 border-b border-blue-300 pb-0.5">0267-78-2121</a>
-            </div>
-            <div class="bg-orange-50 p-4 rounded-2xl text-center border border-orange-100 shadow-sm">
-                <i class="fas fa-clock text-orange-500 mb-1 text-lg"></i>
-                <p class="text-[10px] text-orange-600 font-black uppercase mb-1">出し方</p>
-                <span class="text-[11px] font-black text-orange-800 leading-tight">朝6:00〜8:30</span>
             </div>
         </section>
 
