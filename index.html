@@ -184,15 +184,15 @@
 
         <!-- Info Cards -->
         <section class="px-4 grid grid-cols-2 gap-3 mb-10">
-            <div class="bg-blue-50 p-4 rounded-2xl text-center border border-blue-100">
+            <div class="bg-blue-50 p-4 rounded-2xl text-center border border-blue-100 shadow-sm active:bg-blue-100 transition-colors">
                 <i class="fas fa-phone-alt text-blue-500 mb-1 text-lg"></i>
-                <p class="text-[9px] text-blue-600 font-bold uppercase">役場 住民課</p>
-                <a href="tel:0267-78-2121" class="text-xs font-black text-blue-800 tracking-tighter">78-2121</a>
+                <p class="text-[10px] text-blue-600 font-black uppercase mb-1">役場 住民課</p>
+                <a href="tel:0267-78-2121" class="text-xs font-black text-blue-900 border-b border-blue-300 pb-0.5">0267-78-2121</a>
             </div>
-            <div class="bg-orange-50 p-4 rounded-2xl text-center border border-orange-100">
+            <div class="bg-orange-50 p-4 rounded-2xl text-center border border-orange-100 shadow-sm">
                 <i class="fas fa-clock text-orange-500 mb-1 text-lg"></i>
-                <p class="text-[9px] text-orange-600 font-bold uppercase">出し方</p>
-                <span class="text-[10px] font-black text-orange-800 leading-tight">朝8:30まで</span>
+                <p class="text-[10px] text-orange-600 font-black uppercase mb-1">出し方</p>
+                <span class="text-[11px] font-black text-orange-800 leading-tight">朝6:00〜8:30</span>
             </div>
         </section>
 
@@ -250,7 +250,6 @@
         }
 
         function initApp() {
-            // 1. 今日の表示を更新
             const todayStr = `${REAL_TODAY.getFullYear()}-${String(REAL_TODAY.getMonth()+1).padStart(2,'0')}-${String(REAL_TODAY.getDate()).padStart(2,'0')}`;
             const todayDisplayEl = document.getElementById('today-display');
             if (todayDisplayEl) {
@@ -261,7 +260,6 @@
             }
             renderTypes('today-content', getGarbageTypes(todayStr), true);
 
-            // 2. 12か月分の月間カレンダーを生成
             monthSlider.innerHTML = '';
             monthTabsContainer.innerHTML = '';
             let tempDate = new Date(REAL_TODAY.getFullYear(), REAL_TODAY.getMonth(), 1);
@@ -270,7 +268,6 @@
                 const y = tempDate.getFullYear();
                 const m = tempDate.getMonth();
 
-                // --- タブ生成 ---
                 const btn = document.createElement('button');
                 btn.id = `tab-${y}-${m}`;
                 btn.className = `month-tab tab-${y}`;
@@ -278,7 +275,6 @@
                 btn.onclick = () => scrollToMonth(i);
                 monthTabsContainer.appendChild(btn);
 
-                // --- ページ生成 ---
                 const page = document.createElement('div');
                 page.className = 'month-page';
                 page.dataset.index = i;
@@ -300,7 +296,7 @@
                     const wChar = dayNames[dayNum];
 
                     html += `
-                        <div class="calendar-item ${isToday ? 'ring-2 ring-[#2d5a27] border-green-200 bg-green-50' : ''}">
+                        <div class="calendar-item ${isToday ? 'ring-2 ring-[#2d5a27] border-green-200 bg-green-50 shadow-sm' : ''}">
                             <div class="flex justify-between items-center mb-2">
                                 <span class="text-xs font-black ${dateColor}">${m + 1}/${d}（${wChar}）</span>
                             </div>
